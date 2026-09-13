@@ -126,47 +126,243 @@
 <div class="dots" id="dots"></div>
 
 <script>
-
 const DATA = {
-  period: "Year to Date \u2014 Jan 1 through Sep 13, 2026",
-  updated: "Sep 13, 2026, 1:36 PM",
-  main: [
-    {"name":"Michael Street","jobs":93,"hours":109.09999999999994,"revenue":44360.450000000004,"rate":406.6035747021084},
-    {"name":"Keith Foster","jobs":18,"hours":27.65,"revenue":11227.0,"rate":406.03978300180836},
-    {"name":"Noah Dennis","jobs":169,"hours":229.56666600000005,"revenue":90697.8,"rate":395.0826205752362},
-    {"name":"James Perkins","jobs":530,"hours":506.21666799999997,"revenue":191749.11000000002,"rate":378.7886138905249},
-    {"name":"Garrett Fontaine","jobs":148,"hours":211.63333599999999,"revenue":77129.45,"rate":364.4484912339141},
-    {"name":"Wayne Bell","jobs":229,"hours":375.56666000000007,"revenue":128308.25,"rate":341.6390847899012},
-    {"name":"Cameron Kimball","jobs":14,"hours":33.24999799999999,"revenue":10980.0,"rate":330.2255837729675},
-    {"name":"Neva Stevens","jobs":146,"hours":236.599997,"revenue":77270.9,"rate":326.5887615374737},
-    {"name":"Josh Maxfield","jobs":5,"hours":13.583331000000001,"revenue":4363.0,"rate":321.2025091636212},
-    {"name":"Bill Heald","jobs":88,"hours":143.26666500000002,"revenue":45174.84,"rate":315.3199664416003},
-    {"name":"Tim Nathanson","jobs":418,"hours":541.8166709999997,"revenue":157651.16999999998,"rate":290.9677358377186},
-    {"name":"Rob Milligan","jobs":88,"hours":187.74999699999995,"revenue":52888.020000000004,"rate":281.6938527034971},
-    {"name":"Zachary Biron","jobs":27,"hours":69.44999800000001,"revenue":18649.1,"rate":268.5255656882812},
-    {"name":"Kinap Bassett","jobs":62,"hours":94.29999600000002,"revenue":24008.0,"rate":254.59173932520628},
-    {"name":"Christian Mendez","jobs":276,"hours":557.1500000000004,"revenue":134234.98000000004,"rate":240.93149062191497},
-    {"name":"Corey Geyer ","jobs":323,"hours":622.0333309999997,"revenue":144972.59000000003,"rate":233.06241446408936},
-    {"name":"Troy Hatton","jobs":92,"hours":154.0333330000001,"revenue":32281.760000000002,"rate":209.57645576623327},
-    {"name":"Norman Saindon","jobs":11,"hours":16.300001,"revenue":3369.0,"rate":206.68710388422673},
-    {"name":"Jake Worthing","jobs":29,"hours":85.816668,"revenue":14447.42,"rate":168.35214343208943},
-    {"name":"Aaron Beverly ","jobs":9,"hours":21.716667000000005,"revenue":3558.0,"rate":163.83729602705606},
-    {"name":"Tyler Campbell","jobs":8,"hours":43.84999800000001,"revenue":6027.45,"rate":137.45610661145295},
-    {"name":"Patrick Tracy","jobs":34,"hours":124.53333200000003,"revenue":16347.839999999998,"rate":131.27280654467668},
-    {"name":"Sam Lewis ","jobs":10,"hours":58.683333,"revenue":5601.0,"rate":95.44447654328019},
-    {"name":"Jesus Molina-Mendez","jobs":162,"hours":791.550005,"revenue":75429.8,"rate":95.29379006194308},
-    {"name":"Michael Sutherland","jobs":6,"hours":54.01666799999999,"revenue":3708.0,"rate":68.64547809576112},
-    {"name":"Wayne Young","jobs":44,"hours":268.23333800000006,"revenue":17230.3,"rate":64.23623598942797},
-    {"name":"Jackson Ndikumana","jobs":24,"hours":287.8166639999999,"revenue":12333.75,"rate":42.8528002117348},
-    {"name":"Eddie Barquero","jobs":8,"hours":161.98333600000004,"revenue":4722.0,"rate":29.151146757466453},
-    {"name":"Dave LaBrecque","jobs":7,"hours":0,"revenue":2228.86,"rate":null}
+  "period": "Year to Date \u2014 Jan 1 through Sep 13, 2026",
+  "updated": "Sep 13, 2026, 7:17 PM",
+  "main": [
+    {
+      "name": "Michael Street",
+      "jobs": 93,
+      "hours": 109.1,
+      "revenue": 44360.45,
+      "rate": 406.6
+    },
+    {
+      "name": "Keith Foster",
+      "jobs": 18,
+      "hours": 27.65,
+      "revenue": 11227.0,
+      "rate": 406.04
+    },
+    {
+      "name": "Noah Dennis",
+      "jobs": 169,
+      "hours": 229.57,
+      "revenue": 90697.8,
+      "rate": 395.08
+    },
+    {
+      "name": "James Perkins",
+      "jobs": 530,
+      "hours": 506.22,
+      "revenue": 191749.11,
+      "rate": 378.79
+    },
+    {
+      "name": "Garrett Fontaine",
+      "jobs": 148,
+      "hours": 211.63,
+      "revenue": 77129.45,
+      "rate": 364.45
+    },
+    {
+      "name": "Wayne Bell",
+      "jobs": 229,
+      "hours": 375.57,
+      "revenue": 128308.25,
+      "rate": 341.64
+    },
+    {
+      "name": "Cameron Kimball",
+      "jobs": 14,
+      "hours": 33.25,
+      "revenue": 10980.0,
+      "rate": 330.23
+    },
+    {
+      "name": "Neva Stevens",
+      "jobs": 146,
+      "hours": 236.6,
+      "revenue": 77270.9,
+      "rate": 326.59
+    },
+    {
+      "name": "Josh Maxfield",
+      "jobs": 5,
+      "hours": 13.58,
+      "revenue": 4363.0,
+      "rate": 321.2
+    },
+    {
+      "name": "Bill Heald",
+      "jobs": 88,
+      "hours": 143.27,
+      "revenue": 45174.84,
+      "rate": 315.32
+    },
+    {
+      "name": "Tim Nathanson",
+      "jobs": 418,
+      "hours": 541.82,
+      "revenue": 157651.17,
+      "rate": 290.97
+    },
+    {
+      "name": "Rob Milligan",
+      "jobs": 88,
+      "hours": 187.75,
+      "revenue": 52888.02,
+      "rate": 281.69
+    },
+    {
+      "name": "Zachary Biron",
+      "jobs": 27,
+      "hours": 69.45,
+      "revenue": 18649.1,
+      "rate": 268.53
+    },
+    {
+      "name": "Kinap Bassett",
+      "jobs": 62,
+      "hours": 94.3,
+      "revenue": 24008.0,
+      "rate": 254.59
+    },
+    {
+      "name": "Christian Mendez",
+      "jobs": 276,
+      "hours": 557.15,
+      "revenue": 134234.98,
+      "rate": 240.93
+    },
+    {
+      "name": "Corey Geyer",
+      "jobs": 323,
+      "hours": 622.03,
+      "revenue": 144972.59,
+      "rate": 233.06
+    },
+    {
+      "name": "Troy Hatton",
+      "jobs": 92,
+      "hours": 154.03,
+      "revenue": 32281.76,
+      "rate": 209.58
+    },
+    {
+      "name": "Norman Saindon",
+      "jobs": 11,
+      "hours": 16.3,
+      "revenue": 3369.0,
+      "rate": 206.69
+    },
+    {
+      "name": "Jake Worthing",
+      "jobs": 29,
+      "hours": 85.82,
+      "revenue": 14447.42,
+      "rate": 168.35
+    },
+    {
+      "name": "Aaron Beverly",
+      "jobs": 9,
+      "hours": 21.72,
+      "revenue": 3558.0,
+      "rate": 163.84
+    },
+    {
+      "name": "Tyler Campbell",
+      "jobs": 8,
+      "hours": 43.85,
+      "revenue": 6027.45,
+      "rate": 137.46
+    },
+    {
+      "name": "Patrick Tracy",
+      "jobs": 34,
+      "hours": 124.53,
+      "revenue": 16347.84,
+      "rate": 131.27
+    },
+    {
+      "name": "Sam Lewis",
+      "jobs": 10,
+      "hours": 58.68,
+      "revenue": 5601.0,
+      "rate": 95.44
+    },
+    {
+      "name": "Jesus Molina-Mendez",
+      "jobs": 162,
+      "hours": 791.55,
+      "revenue": 75429.8,
+      "rate": 95.29
+    },
+    {
+      "name": "Michael Sutherland",
+      "jobs": 6,
+      "hours": 54.02,
+      "revenue": 3708.0,
+      "rate": 68.65
+    },
+    {
+      "name": "Wayne Young",
+      "jobs": 44,
+      "hours": 268.23,
+      "revenue": 17230.3,
+      "rate": 64.24
+    },
+    {
+      "name": "Jackson Ndikumana",
+      "jobs": 24,
+      "hours": 287.82,
+      "revenue": 12333.75,
+      "rate": 42.85
+    },
+    {
+      "name": "Eddie Barquero",
+      "jobs": 8,
+      "hours": 161.98,
+      "revenue": 4722.0,
+      "rate": 29.15
+    },
+    {
+      "name": "Dave LaBrecque",
+      "jobs": 7,
+      "hours": 0.0,
+      "revenue": 2228.86,
+      "rate": null
+    }
   ],
-  low: [
-    {"name":"Afterhours/Emergency","jobs":1,"hours":0.033333,"revenue":845.0,"rate":25350.253502535023},
-    {"name":"Return Trip ","jobs":1,"hours":0,"revenue":89.0,"rate":null},
-    {"name":"Warranty ","jobs":1,"hours":0,"revenue":900.0,"rate":null}
+  "low": [
+    {
+      "name": "Afterhours/Emergency",
+      "jobs": 1,
+      "hours": 0.03,
+      "revenue": 845.0,
+      "rate": 25350.25
+    },
+    {
+      "name": "Return Trip",
+      "jobs": 1,
+      "hours": 0.0,
+      "revenue": 89.0,
+      "rate": null
+    },
+    {
+      "name": "Warranty",
+      "jobs": 1,
+      "hours": 0.0,
+      "revenue": 900.0,
+      "rate": null
+    }
   ],
-  totals: {jobs:3078, hours:6027.466657, revenue:1410949.8400000003, blended:234.0867101042182}
+  "totals": {
+    "jobs": 3078,
+    "hours": 6027.47,
+    "revenue": 1410949.84,
+    "blended": 234.09
+  }
 };
 
 const PHOTOS = {
