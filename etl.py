@@ -46,10 +46,10 @@ OFFICE_TZ = ZoneInfo("America/New_York")
 
 # ---------------------------------------------------------------- config
 
-TENANT = os.environ["ST_TENANT_ID"]
-APP_KEY = os.environ["ST_APP_KEY"]
-CLIENT_ID = os.environ["ST_CLIENT_ID"]
-CLIENT_SECRET = os.environ["ST_CLIENT_SECRET"]
+TENANT = os.environ["ST_TENANT_ID"].strip()
+APP_KEY = os.environ["ST_APP_KEY"].strip()
+CLIENT_ID = os.environ["ST_CLIENT_ID"].strip()
+CLIENT_SECRET = os.environ["ST_CLIENT_SECRET"].strip()
 
 # ServiceTitan's Cloudflare blocks the default urllib User-Agent (error 1010).
 USER_AGENT = "laplante-etl/2.0"
