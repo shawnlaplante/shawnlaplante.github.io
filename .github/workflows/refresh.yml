@@ -1,0 +1,83 @@
+name: Refresh TV Dashboard
+
+# Runs on GitHub's servers, so it does NOT matter whether Shawn's PC is on.
+#
+# Cron is always UTC. These times are Eastern DAYLIGHT time (UTC-4), giving
+# 7am-7pm ET every 2 hours. When the clocks fall back to EST (UTC-5) in
+# November, this becomes 6am-6pm ET — bump each hour by 1 to correct it.
+# GitHub queues scheduled runs on a best-effort basis and they can start
+# 5-15 minutes late under load. That is normal and harmless here.
+
+on:
+  schedule:
+    - cron: "0 11,13,15,17,19,21,23 * * *"
+  workflow_dispatch: {}        # lets you run it on demand from the Actions tab
+
+# Least privilege: the job may write repo contents and nothing else.
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-refresh
+  cancel-in-progress: false    # never interrupt a run mid-push
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20        # the real work takes ~3-5 min
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild index.html from raw ServiceTitan data
+        env:
+          # These come from repo Settings -> Secrets and variables -> Actions.
+          # Never paste the literal values into this file: it lives in the
+          # repo, and anything committed here is permanent in git history.
+          ST_TENANT_ID: ${{ secrets.ST_TENANT_ID }}
+          ST_APP_KEY: ${{ secrets.ST_APP_KEY }}
+          ST_CLIENT_ID: ${{ secrets.ST_CLIENT_ID }}
+          ST_CLIENT_SECRET: ${{ secrets.ST_CLIENT_SECRET }}
+        run: python etl.py index.html
+
+      - name: Confirm no secret leaked into the page
+        run: |
+          if grep -qE 'ak1\.|cid\.|cs1\.|github_pat_' index.html; then
+            echo "::error::A credential appeared in index.html - refusing to publish"
+            exit 1
+          fi
+          echo "index.html is clean"
+
+      - name: Commit and push if the numbers changed
+        run: |
+          git config user.name "LaPlante Dashboard Bot"
+          git config user.email "shawn@laplanteelectric.com"
+          if git diff --quiet -- index.html; then
+            echo "No change since last run - nothing to publish."
+            exit 0
+          fi
+          # Guard against the photos ever being clobbered.
+          if git diff -U0 -- index.html | grep -q '^[-+].*data:image'; then
+            echo "::error::The PHOTOS block changed - refusing to push"
+            exit 1
+          fi
+          git add index.html
+          git commit -m "Auto-refresh YTD dashboard $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+        # Pushes with the built-in GITHUB_TOKEN that actions/checkout already
+        # configured. No personal access token, so nothing here expires.
+
+      - name: Explain a failure
+        if: failure()
+        run: |
+          echo "::error::Dashboard refresh FAILED. The office TV is now showing stale numbers."
+          echo "Check the step above for the cause. Common ones:"
+          echo "  - ServiceTitan credentials rotated -> update the repo secrets"
+          echo "  - A verification check failed -> the pull was incomplete; a re-run usually clears it"
+          echo "  - Pay items outgrew the page sweep -> raise PAY_ITEM_PAGE_SWEEP in etl.py"
